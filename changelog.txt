@@ -1,12 +1,13 @@
 ---------------------------------------------------------------------------------------------------
-Version: 2.3.3
+Version: 2.4.0
 Date: ????
   Changes:
+    - (No functionality change) Space connections are now ordered in Factoriopedia based on the PlanetsLib tier of the planets.
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.2
 Date: 2025-11-19
   Changes:
-    - Added sensitivity to the new orbit.is_satellite field on planet prototypes. (No functionality change expected yet.)
+    - (No functionality change) Added sensitivity to the new orbit.is_satellite field on planet prototypes.
 ---------------------------------------------------------------------------------------------------
 Version: 2.3.1
 Date: 2025-11-13

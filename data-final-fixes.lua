@@ -896,6 +896,33 @@ end
 
 data:extend(connections_to_add)
 
+--== Set order on all space connections based on PlanetsLib tier ==--
+
+if data.raw["mod-data"]["PlanetsLib-tierlist"] then
+	local tierlist = data.raw["mod-data"]["PlanetsLib-tierlist"].data
+
+	for _, connection in pairs(data.raw["space-connection"] or {}) do
+		local from_prototype = data.raw.planet[connection.from] or data.raw["space-location"][connection.from]
+		local to_prototype = data.raw.planet[connection.to] or data.raw["space-location"][connection.to]
+
+		if from_prototype and to_prototype then
+			local from_tier = tierlist[from_prototype.type][connection.from] or tierlist.default
+			local to_tier = tierlist[to_prototype.type][connection.to] or tierlist.default
+
+			local lower_tier = math.min(from_tier, to_tier)
+			local higher_tier = math.max(from_tier, to_tier)
+
+			local tier_offset = 1000 -- Accounts for negative tiers
+			connection.order = string.format(
+				"%010.5f-%010.5f-%s",
+				lower_tier + tier_offset,
+				higher_tier + tier_offset,
+				connection.name
+			)
+		end
+	end
+end
+
 --== DEBUG ==--
 
 -- for _, connection in pairs(data.raw["space-connection"] or {}) do
